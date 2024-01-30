@@ -1,0 +1,29 @@
+version: '3'
+services:
+  hostapd:
+    build: ./hostapd
+    container_name: hostapd
+    restart: unless-stopped
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - ./hostapd/conf/hostapd.conf:/etc/hostapd/hostapd.conf
+      - ./hostapd/conf/hostapd.eap_user:/etc/hostapd/eap_user.txt
+      - ./dnsmasq/conf/dhcp.conf:/prj/dhcp.conf
+
+  employee:
+    build: ./employee
+    container_name: employee
+    networks:
+      - enterprise
+
+networks:
+  enterprise:
+    driver: macvlan
+    driver_opts:
+      parent: wlan1
+    ipam:
+      config:
+        - subnet: 192.168.123.0/24
+          gateway: 192.168.123.1
+          ip_range: 192.168.123.192/27
