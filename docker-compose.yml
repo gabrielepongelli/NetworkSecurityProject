@@ -9,7 +9,17 @@ services:
     volumes:
       - ./hostapd/conf/hostapd.conf:/etc/hostapd/hostapd.conf
       - ./hostapd/conf/hostapd.eap_user:/etc/hostapd/eap_user.txt
-      - ./dnsmasq/conf/dhcp.conf:/prj/dhcp.conf
+    #command: -dd -K
+
+  dnsmasq:
+    build: ./dnsmasq
+    container_name: dnsmasq
+    restart: unless-stopped
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./dnsmasq/conf/dhcp.conf:/etc/dnsmasq.conf
 
   employee:
     build: ./employee

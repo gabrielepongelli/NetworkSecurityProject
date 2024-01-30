@@ -26,8 +26,4 @@ WORKDIR /prj/hostapd-2.5/hostapd
 ADD ./build/defconfig .config
 RUN make -j 4 && make install
 
-# add the entrypoint script
-WORKDIR /prj
-ADD ./scripts/entrypoint.sh .
-RUN chmod 755 entrypoint.sh
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "hostapd" "/etc/hostapd/hostapd.conf" ]
