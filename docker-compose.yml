@@ -11,15 +11,14 @@ services:
       - ./hostapd/conf/hostapd.eap_user:/etc/hostapd/eap_user.txt
     #command: -dd -K
 
-  dnsmasq:
-    build: ./dnsmasq
-    container_name: dnsmasq
+  dhcpd:
+    build: ./dhcpd
+    container_name: dhcpd
     restart: unless-stopped
-    network_mode: "host"
-    cap_add:
-      - NET_ADMIN
+    networks:
+      - enterprise
     volumes:
-      - ./dnsmasq/conf/dhcp.conf:/etc/dnsmasq.conf
+      - ./dhcpd/conf/dhcpd.conf:/etc/dhcp/dhcpd.conf
 
   employee:
     build: ./employee
