@@ -26,4 +26,4 @@ WORKDIR /prj/hostapd-2.5/hostapd
 ADD ./build/defconfig .config
 RUN make -j 4 && make install
 
-ENTRYPOINT [ "hostapd" "/etc/hostapd/hostapd.conf" ]
+ENTRYPOINT [ "hostapd", "/etc/hostapd/hostapd.conf" ]
