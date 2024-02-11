@@ -90,7 +90,7 @@ start() {
     esac
 }
 
-if ! [ "$#" != "2" ]; then
+if [ "$#" != "2" ]; then
     usage
 fi
 
