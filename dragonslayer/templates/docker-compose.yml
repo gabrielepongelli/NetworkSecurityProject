@@ -7,4 +7,4 @@ services:
     privileged: true
     volumes:
       - ./conf/client.conf:/prj/script/client.conf
-    command: -i wlp0s20f3 -a 1
+    command: -i ${IFACE} -a 1

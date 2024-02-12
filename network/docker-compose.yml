@@ -9,7 +9,6 @@ services:
     volumes:
       - ./hostapd/conf/hostapd.conf:/etc/hostapd/hostapd.conf
       - ./hostapd/conf/hostapd.eap_user:/etc/hostapd/eap_user.txt
-    #command: -dd -K
 
   dhcpd:
     build: ./dhcpd
